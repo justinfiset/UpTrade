@@ -1,7 +1,11 @@
-import { AppShell, Burger, Group } from "@mantine/core";
+import { AppShell, Burger, Flex, Group, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-export default function AppNav({ children }) {
+import { IconDashboard, IconWallet, IconUser } from "@tabler/icons-react";
+
+import styles from "./AppNav.module.css";
+
+export default function AppNav(props) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -15,15 +19,30 @@ export default function AppNav({ children }) {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <div>Logo</div>
-        </Group>
+        <Flex h="100%" align="center" className={styles.header}>
+          <Group h="100%" px="md">
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
+            <div>Logo</div>
+          </Group>
+          <IconUser />
+        </Flex>
       </AppShell.Header>
 
-      <AppShell.Navbar p="md"></AppShell.Navbar>
+      <AppShell.Navbar p="md">
+        <NavLink href="#home" label="Home" leftSection={<IconDashboard />} />
+        <NavLink
+          href="#portfolio"
+          label="Portfolio"
+          leftSection={<IconWallet />}
+        />
+      </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main>{props.children}</AppShell.Main>
     </AppShell>
   );
 }

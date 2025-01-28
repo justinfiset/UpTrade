@@ -9,13 +9,15 @@ import AppNav from "../components/AppNav";
 import "@mantine/core/styles.css";
 import "../styles/global.css";
 
+const darkTheme = true;
+
 export default function Home() {
   return (
     <>
       <Head>
         <ColorSchemeScript />
       </Head>
-      <MantineProvider defaultColorScheme="dark">
+      <MantineProvider defaultColorScheme={darkTheme ? "dark" : "light"}>
         <AppNav>
           <Dashboard />
         </AppNav>

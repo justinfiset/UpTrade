@@ -2,11 +2,9 @@ import {
   IconArrowDownRight,
   IconArrowUpRight,
   IconCoin,
-  IconDiscount2,
-  IconReceipt2,
-  IconUserPlus,
 } from "@tabler/icons-react";
-import { Group, Paper, SimpleGrid, Text } from "@mantine/core";
+
+import { Group, Paper, Text } from "@mantine/core";
 
 import classes from "../styles/StatCard.module.css";
 
