@@ -1,27 +1,20 @@
-import { createTheme, MantineProvider } from "@mantine/core";
+import Head from "next/head";
 import { ColorSchemeScript } from "@mantine/core";
 
-import Dashboard from "../pages/Dashboard";
-import Head from "next/head";
-
-import AppNav from "../components/AppNav";
-
-import "@mantine/core/styles.css";
 import "../styles/global.css";
+import Layout from "./layout";
 
 const darkTheme = true;
 
-export default function Home() {
+export default function App({Component, pageProps}) {
   return (
     <>
       <Head>
         <ColorSchemeScript />
       </Head>
-      <MantineProvider defaultColorScheme={darkTheme ? "dark" : "light"}>
-        <AppNav>
-          <Dashboard />
-        </AppNav>
-      </MantineProvider>
+      <Layout theme={darkTheme ? "dark" : "light"}>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

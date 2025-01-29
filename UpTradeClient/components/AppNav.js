@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 
 import { IconDashboard, IconWallet, IconUser } from "@tabler/icons-react";
 
+import Link from "next/link";
 import styles from "./AppNav.module.css";
 
 export default function AppNav(props) {
@@ -34,9 +35,15 @@ export default function AppNav(props) {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <NavLink href="#home" label="Home" leftSection={<IconDashboard />} />
         <NavLink
-          href="#portfolio"
+          component={Link}
+          href="/"
+          label="Dashboard"
+          leftSection={<IconDashboard />}
+        />
+        <NavLink
+          component={Link}
+          href="/portfolio"
           label="Portfolio"
           leftSection={<IconWallet />}
         />
