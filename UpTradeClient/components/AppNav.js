@@ -85,7 +85,12 @@ export default function AppNav(props) {
           label="Portfolio"
           leftSection={<IconWallet />}
         />
-        <NavLink href="/browse" label="Browse Stocks" leftSection={<IconSearch />} />
+        <NavLink
+          component={Link}
+          href="/browse"
+          label="Browse Stocks"
+          leftSection={<IconSearch />}
+        />
       </AppShell.Navbar>
 
       <AppShell.Main>{props.children}</AppShell.Main>
