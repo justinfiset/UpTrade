@@ -1,9 +1,29 @@
-import { AppShell, Burger, Flex, Group, NavLink } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Flex,
+  Group,
+  Menu,
+  MenuDivider,
+  NavLink,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { IconDashboard, IconWallet, IconUser } from "@tabler/icons-react";
+import {
+  IconDashboard,
+  IconWallet,
+  IconUser,
+  IconDoorExit,
+  IconDoor,
+  IconDoorOff,
+  IconDoorEnter,
+  IconSettings,
+  IconSearch,
+} from "@tabler/icons-react";
 
 import styles from "./AppNav.module.css";
+
+import Image from "next/image";
 
 export default function AppNav(props) {
   const [opened, { toggle }] = useDisclosure();
@@ -27,19 +47,34 @@ export default function AppNav(props) {
               hiddenFrom="sm"
               size="sm"
             />
-            <div>Logo</div>
+            <Image
+              src="/images/uptrade-logo.png"
+              alt="logo"
+              height={50}
+              width={50}
+            />
+            <div>UpTrade</div>
           </Group>
-          <IconUser />
+          <Menu trigger="hover">
+            <Menu.Target>
+              <IconUser />
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Label>User</Menu.Label>
+              <Menu.Item leftSection={<IconSettings />}>Settings</Menu.Item>
+              <MenuDivider />
+              <Menu.Item color="red" leftSection={<IconDoorEnter />}>
+                Logout
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </Flex>
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <NavLink href="#home" label="Home" leftSection={<IconDashboard />} />
-        <NavLink
-          href="#portfolio"
-          label="Portfolio"
-          leftSection={<IconWallet />}
-        />
+        <NavLink href="/" label="Home" leftSection={<IconDashboard />} />
+        <NavLink href="/portfolio" label="Portfolio" leftSection={<IconWallet />} />
+        <NavLink href="/browse" label="Browse Stocks" leftSection={<IconSearch />} />
       </AppShell.Navbar>
 
       <AppShell.Main>{props.children}</AppShell.Main>
