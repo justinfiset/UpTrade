@@ -1,16 +1,7 @@
-import { useForm } from "@mantine/form";
+import { Title } from "@mantine/core";
 
 export default function SignUp() {
-    return(
-        const form = useForm({
-            mode: "uncontrolled",
-            initialValues: {
-                email: "",
-                firstname: "",
-                lastname: "",
-                password: "",
-                tos: false
-            }
-        })
+    return (
+        <Title>Sign up</Title>
     );
 }

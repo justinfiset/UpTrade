@@ -21,12 +21,35 @@ import {
     IconDoorEnter,
     IconSettings,
     IconSearch,
+    IconPencil,
 } from "@tabler/icons-react";
 
 import Link from "next/link";
 import styles from "./AppNav.module.css";
 
 import Image from "next/image";
+
+const loggedInMenu = (
+    <Menu.Dropdown>
+        <Menu.Label>User</Menu.Label>
+        <Menu.Item leftSection={<IconSettings />}>Settings</Menu.Item>
+        <MenuDivider />
+        <Menu.Item color="red" leftSection={<IconDoorEnter />}>
+            Logout
+        </Menu.Item>
+    </Menu.Dropdown>
+);
+
+const loggedOutMenu = (
+    <Menu.Dropdown>
+        <Menu.Item component={Link} href="/login" leftSection={<IconUser />}>
+            Login
+        </Menu.Item>
+        <Menu.Item component={Link} href="/signup" leftSection={<IconPencil />}>
+            Sign up
+        </Menu.Item>
+    </Menu.Dropdown>
+);
 
 export default function AppNav(props) {
     const [opened, { toggle }] = useDisclosure();
@@ -51,7 +74,7 @@ export default function AppNav(props) {
                             size="sm"
                         />
                         <Link href="/">
-                        <Image
+                            <Image
                                 src="/images/uptrade-logo.png"
                                 alt="logo"
                                 height={50}
@@ -59,23 +82,12 @@ export default function AppNav(props) {
                             />
                         </Link>
                     </Group>
+
                     <Menu trigger="hover">
                         <Menu.Target>
                             <IconUser />
                         </Menu.Target>
-                        <Menu.Dropdown>
-                            <Menu.Label>User</Menu.Label>
-                            <Menu.Item leftSection={<IconSettings />}>
-                                Settings
-                            </Menu.Item>
-                            <MenuDivider />
-                            <Menu.Item
-                                color="red"
-                                leftSection={<IconDoorEnter />}
-                            >
-                                Logout
-                            </Menu.Item>
-                        </Menu.Dropdown>
+                        {props.loggedIn ? loggedInMenu : loggedOutMenu}
                     </Menu>
                 </Flex>
             </AppShell.Header>
