@@ -22,7 +22,11 @@ export default function SignUp() {
                 label="Confirm password"
                 placeholder="Confirm your password"
             />
-            <Checkbox label="I Agree to the terms and conditions" mt="xl" size="md" />
+            <Checkbox
+                label="I Agree to the terms and conditions"
+                mt="xl"
+                size="md"
+            />
             <Button fullWidth mt="xl" size="md">
                 Register
             </Button>
