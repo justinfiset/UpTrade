@@ -1,5 +1,6 @@
 import {
     AppShell,
+    Avatar,
     Burger,
     Flex,
     Group,
@@ -26,7 +27,6 @@ import {
 } from "@tabler/icons-react";
 
 import Link from "next/link";
-import styles from "./AppNav.module.css";
 
 import Image from "next/image";
 import LoginForm from "./LoginForm";
@@ -68,10 +68,18 @@ export default function AppNav(props) {
     const loggedOutMenu = (
         <Menu.Dropdown>
             <Menu.Label>User Settings</Menu.Label>
-            <Menu.Item onClick={() => openModalWithType("login")} leftSection={<IconUser />}>
+            <Menu.Item
+                onClick={() => openModalWithType("login")}
+                leftSection={<IconUser />}
+            >
                 Login
             </Menu.Item>
-            <Menu.Item onClick={() => openModalWithType("signup")} leftSection={<IconPencil />}>Sign up</Menu.Item>
+            <Menu.Item
+                onClick={() => openModalWithType("signup")}
+                leftSection={<IconPencil />}
+            >
+                Sign up
+            </Menu.Item>
         </Menu.Dropdown>
     );
 
@@ -86,7 +94,7 @@ export default function AppNav(props) {
             padding="md"
         >
             <AppShell.Header>
-                <Flex h="100%" align="center" className={styles.header}>
+                <Flex h="100%" align="center">
                     <Group h="100%" px="md">
                         <Burger
                             opened={opened}
@@ -104,9 +112,12 @@ export default function AppNav(props) {
                         </Link>
                     </Group>
 
-                    <Menu trigger="hover">
+                    <Menu trigger="hover" ml={"auto"} mr={"1.5em"}>
                         <Menu.Target>
-                            <IconUser />
+                          <Group>
+                          <Avatar color="green" radius="xl"></Avatar>
+                          <Avatar color="green" radius="xl">MK</Avatar>
+                          </Group>
                         </Menu.Target>
                         {props.loggedIn ? loggedInMenu : loggedOutMenu}
                     </Menu>
@@ -136,7 +147,12 @@ export default function AppNav(props) {
 
             <AppShell.Main>
                 {props.children}
-                <Modal centered opened={openedModal} onClose={close} title={modals[activeModal].title}>
+                <Modal
+                    centered
+                    opened={openedModal}
+                    onClose={close}
+                    title={modals[activeModal].title}
+                >
                     {modals[activeModal].content}
                 </Modal>
             </AppShell.Main>
