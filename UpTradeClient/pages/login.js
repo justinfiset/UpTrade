@@ -1,5 +1,7 @@
 import {
     Button,
+    Checkbox,
+    Container,
     Modal,
     Paper,
     PasswordInput,
@@ -7,10 +9,19 @@ import {
     Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-    Checkbox,
 
 export default function LoginForm() {
-            <Button fullWidth mt="xl" size="md">Login</Button>
-            <Checkbox label="Keep me logged in" mt="xl" size="md" />
+    const [opened, { open, close }] = useDisclosure(true);
+
+    return (
+        <Paper>
+            <Modal opened={opened} onClose={close} title="Login" centered>
+                <Title>Welcome back!</Title>
+                <TextInput label="Email" placeholder="user@mail.com" />
+                <PasswordInput label="Password" placeholder="Your password" />
+                <Checkbox label="Keep me logged in" mt="xl" size="md" />
+                <Button fullWidth mt="xl" size="md">Login</Button>
+            </Modal>
+        </Paper>
     );
 }
