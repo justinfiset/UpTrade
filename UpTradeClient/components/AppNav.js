@@ -5,6 +5,7 @@ import {
     Group,
     Menu,
     MenuDivider,
+    Modal,
     NavLink,
     Text,
     Title,
@@ -28,32 +29,51 @@ import Link from "next/link";
 import styles from "./AppNav.module.css";
 
 import Image from "next/image";
-import LoginForm from "../pages/login";
-
-const loggedInMenu = (
-    <Menu.Dropdown>
-        <Menu.Label>User</Menu.Label>
-        <Menu.Item leftSection={<IconSettings />}>Settings</Menu.Item>
-        <MenuDivider />
-        <Menu.Item color="red" leftSection={<IconDoorEnter />}>
-            Logout
-        </Menu.Item>
-    </Menu.Dropdown>
-);
-
-const loggedOutMenu = (
-    <Menu.Dropdown>
-        <Menu.Item component={Link} href="/login" leftSection={<IconUser />}>
-            Login
-        </Menu.Item>
-        <Menu.Item component={Link} href="/signup" leftSection={<IconPencil />}>
-            Sign up
-        </Menu.Item>
-    </Menu.Dropdown>
-);
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
+import { useState } from "react";
 
 export default function AppNav(props) {
     const [opened, { toggle }] = useDisclosure();
+
+    const [openedModal, { open, close }] = useDisclosure();
+    const [activeModal, setActiveModal] = useState("login"); // Stocke la clé du modal actif
+    const modals = {
+        login: { title: "Login", content: <LoginForm /> },
+        signup: { title: "Register", content: <SignupForm /> },
+    };
+
+    const openModalWithType = (type) => {
+        setActiveModal(type);
+        open();
+    };
+
+    const loggedInMenu = (
+        <Menu.Dropdown>
+            <Menu.Label>User Settings</Menu.Label>
+            <Menu.Item
+                component={Link}
+                href="/settings"
+                leftSection={<IconSettings />}
+            >
+                Settings
+            </Menu.Item>
+            <MenuDivider />
+            <Menu.Item color="red" leftSection={<IconDoorEnter />}>
+                Logout
+            </Menu.Item>
+        </Menu.Dropdown>
+    );
+
+    const loggedOutMenu = (
+        <Menu.Dropdown>
+            <Menu.Label>User Settings</Menu.Label>
+            <Menu.Item onClick={() => openModalWithType("login")} leftSection={<IconUser />}>
+                Login
+            </Menu.Item>
+            <Menu.Item onClick={() => openModalWithType("signup")} leftSection={<IconPencil />}>Sign up</Menu.Item>
+        </Menu.Dropdown>
+    );
 
     return (
         <AppShell
@@ -114,7 +134,12 @@ export default function AppNav(props) {
                 />
             </AppShell.Navbar>
 
-            <AppShell.Main>{props.children}</AppShell.Main>
+            <AppShell.Main>
+                {props.children}
+                <Modal centered opened={openedModal} onClose={close} title={modals[activeModal].title}>
+                    {modals[activeModal].content}
+                </Modal>
+            </AppShell.Main>
         </AppShell>
     );
 }

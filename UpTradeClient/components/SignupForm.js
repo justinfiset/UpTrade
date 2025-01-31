@@ -8,9 +8,9 @@ import {
     Checkbox,
 } from "@mantine/core";
 
-export default function SignUp() {
+export default function SignupForm() {
     return (
-        <Container size="xs" my={40}>
+        <>
             <Title>Sign up</Title>
             <Group grow={true}>
                 <TextInput label="Firstname" placeholder="John" />
@@ -30,6 +30,6 @@ export default function SignUp() {
             <Button fullWidth mt="xl" size="md">
                 Register
             </Button>
-        </Container>
+        </>
     );
 }
