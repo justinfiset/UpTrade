@@ -12,6 +12,7 @@
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.48.1",
     "@tabler/icons-react": "^3.29.0",
+    "finnhub": "^1.2.19",
     "next": "^15.1.6",
     "normalize-css-color": "^1.0.2",
     "normalize.css": "^8.0.1",
