@@ -23,7 +23,7 @@ export default function SignupForm() {
                 placeholder="Confirm your password"
             />
             <Checkbox
-                label="I Agree to the terms and conditions"
+                label="I agree to the terms and conditions."
                 mt="xl"
                 size="md"
             />
