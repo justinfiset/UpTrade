@@ -31,7 +31,8 @@ export default function Portfolio() {
                 <Table.Td>
                     <Group>
                         <AvatarIcon
-                            src={"/api/stock-logo?symbol=" + stock.symbol}
+                            src={"/api/stock?symbol=" + stock.symbol}
+                            id="logo"
                             name={stock.name}
                         />
                         {stock.name}

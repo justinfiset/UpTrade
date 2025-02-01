@@ -1,16 +1,22 @@
 export default async function handler(req, res) {
-    const { symbol } = req.query;
+    const finnhub = require("finnhub");
+    const local_key = process.env.FINNHUB_API_KEY;
 
-    if (!symbol) {
-        return res.status(400).json({ error: "Le symbole est requis" });
+    if (!local_key) {
+        return res.status(500).json({ error: "API Key not defined in .env.local" });
     }
 
-    try {
-        const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINNHUB_API_KEY}`);
-        const data = await response.json();
+    const api_key = finnhub.ApiClient.instance.authentications["api_key"];
+    api_key.apiKey = local_key;
 
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({ error: "Erreur lors de la récupération des données" });
-    }
+    const finnhubClient = new finnhub.DefaultApi();
+
+    // TEST avec une requête plus simple (quote au lieu de stockCandles)
+    finnhubClient.companyProfile2(req.query, (error, data, response) => {
+        if (error) {
+            return res.status(500).json({ error: "Error fetching data from Finnhub" });
+        }
+
+        return res.status(200).json(data); // Envoyer uniquement les données
+    });
 }

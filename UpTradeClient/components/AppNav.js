@@ -33,6 +33,7 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { useState } from "react";
 import AvatarIcon from "./AvatarIcon";
+import DynamicBreadcrumbs from "./DynamicBreadcrumbs";
 
 export default function AppNav(props) {
     const [opened, { toggle }] = useDisclosure();
@@ -113,6 +114,8 @@ export default function AppNav(props) {
                         </Link>
                     </Group>
 
+                    <DynamicBreadcrumbs />
+
                     <Menu trigger="hover" ml={"auto"} mr={"1.5em"}>
                         <Menu.Target>
                           <Group>
@@ -139,7 +142,7 @@ export default function AppNav(props) {
                 />
                 <NavLink
                     component={Link}
-                    href="/browse"
+                    href="/stock"
                     label="Browse Stocks"
                     leftSection={<IconSearch />}
                 />

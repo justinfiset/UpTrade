@@ -6,7 +6,7 @@ export default function AvatarIcon(props) {
     const [logoError, setLogoError] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const size = props.size ? props.size : 50;
+    const size = props.size ? props.size : 40;
 
     useEffect(() => {
         async function fetchStockLogo() {
@@ -15,8 +15,8 @@ export default function AvatarIcon(props) {
             try {
                 const response = await fetch(props.src);
                 const data = await response.json();
-                if (data.logo) {
-                    setLogo(data.logo);
+                if (data[props.id]) {
+                    setLogo(data[props.id]);
                 } else {
                     setLogoError(true);
                 }

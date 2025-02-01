@@ -6,6 +6,7 @@ import AvatarIcon from "../../components/AvatarIcon";
 export default function Stock() {
     const [stockData, setStockData] = useState(null);
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
 
     // Vérifie que `router` est prêt avant de récupérer la donnée
     const stockSymbol = router.isReady ? router.query.stock : null;
@@ -13,16 +14,16 @@ export default function Stock() {
         if (!stockSymbol) return; // Ne fait rien tant que `stockSymbol` est null
 
         async function fetchStockData() {
+            setLoading(true);
+
             try {
                 const url = `/api/stock?symbol=${stockSymbol}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setStockData(data);
+                setLoading(false);
             } catch (error) {
-                console.error(
-                    "Erreur lors de la récupération des données du stock:",
-                    error
-                );
+                console.error(error);
             }
         }
         fetchStockData();
@@ -31,13 +32,16 @@ export default function Stock() {
     return (
         <>
             <Group>
-                {
-                    stockSymbol ? (<AvatarIcon
+                {stockSymbol ? (
+                    <AvatarIcon
                         src={"/api/stock-logo?symbol=" + router.query.stock}
+                        id="logo"
                         name={router.query.stock}
-                    />) : (<></>)
-                }
-                <Title>{router.query.stock}</Title>
+                    />
+                ) : (
+                    <></>
+                )}
+                <Title>{!loading ? stockData.name : ""} - {router.query.stock}</Title>
             </Group>
 
             <Paper shadow="md" radius="md" withBorder p="xl">
