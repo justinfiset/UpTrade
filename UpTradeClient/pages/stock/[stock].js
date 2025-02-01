@@ -31,10 +31,12 @@ export default function Stock() {
     return (
         <>
             <Group>
-                <AvatarIcon
-                    src={"/api/stock-logo?symbol=" + router.query.stock}
-                    name={router.query.stock}
-                />
+                {
+                    stockSymbol ? (<AvatarIcon
+                        src={"/api/stock-logo?symbol=" + router.query.stock}
+                        name={router.query.stock}
+                    />) : (<></>)
+                }
                 <Title>{router.query.stock}</Title>
             </Group>
 

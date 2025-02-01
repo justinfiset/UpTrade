@@ -42,9 +42,9 @@ export default function Portfolio() {
                         {stock.symbol}
                     </Anchor>
                 </Table.Td>
-                <Table.Td>{stock.price}</Table.Td>
+                <Table.Td>{"$" + stock.price}</Table.Td>
                 <Table.Td>{stock.quantity}</Table.Td>
-                <Table.Td>{(stock.price * stock.quantity).toFixed(2)}</Table.Td>
+                <Table.Td>{"$" + (stock.price * stock.quantity).toFixed(2)}</Table.Td>
             </Table.Tr>
         );
     });
@@ -52,7 +52,7 @@ export default function Portfolio() {
     return (
         <>
             <Title>Your stock portfolio</Title>
-            <Paper shadow="md" radius="md" withBorder p="xl">
+            <Paper shadow="md" radius="md" withBorder p="xl" w={800}> 
                 <Table>
                     <Table.Thead>
                         <Table.Tr>

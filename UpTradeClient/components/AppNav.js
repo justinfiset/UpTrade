@@ -116,7 +116,7 @@ export default function AppNav(props) {
                     <Menu trigger="hover" ml={"auto"} mr={"1.5em"}>
                         <Menu.Target>
                           <Group>
-                          <AvatarIcon></AvatarIcon>
+                            <AvatarIcon />
                           </Group>
                         </Menu.Target>
                         {props.loggedIn ? loggedInMenu : loggedOutMenu}
