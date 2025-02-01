@@ -1,4 +1,12 @@
-import { Title, Table, Group, Avatar, Anchor, Paper } from "@mantine/core";
+import {
+    Title,
+    Table,
+    Group,
+    Avatar,
+    Anchor,
+    Paper,
+    NumberFormatter,
+} from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import AvatarIcon from "../components/AvatarIcon";
@@ -43,9 +51,23 @@ export default function Portfolio() {
                         {stock.symbol}
                     </Anchor>
                 </Table.Td>
-                <Table.Td>{"$" + stock.price}</Table.Td>
+                <Table.Td>
+                    <NumberFormatter
+                        prefix="$ "
+                        value={stock.price}
+                        thousandSeparator
+                        decimalScale={2}
+                    />
+                </Table.Td>
                 <Table.Td>{stock.quantity}</Table.Td>
-                <Table.Td>{"$" + (stock.price * stock.quantity).toFixed(2)}</Table.Td>
+                <Table.Td>
+                    <NumberFormatter
+                        prefix="$ "
+                        value={stock.price * stock.quantity}
+                        thousandSeparator
+                        decimalScale={2}
+                    />
+                </Table.Td>
             </Table.Tr>
         );
     });
@@ -53,7 +75,7 @@ export default function Portfolio() {
     return (
         <>
             <Title>Your stock portfolio</Title>
-            <Paper shadow="md" radius="md" withBorder p="xl" w={800}> 
+            <Paper shadow="md" radius="md" withBorder p="xl" w={800}>
                 <Table>
                     <Table.Thead>
                         <Table.Tr>

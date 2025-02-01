@@ -1,4 +1,4 @@
-import { Avatar, Group, Paper, Title } from "@mantine/core";
+import { Avatar, Group, Paper, Space, Stack, Text, Title } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AvatarIcon from "../../components/AvatarIcon";
@@ -31,31 +31,42 @@ export default function Stock() {
 
     return (
         <>
-            <Group>
-                {stockSymbol ? (
-                    <AvatarIcon
-                        src={"/api/stock-logo?symbol=" + router.query.stock}
-                        id="logo"
-                        name={router.query.stock}
-                    />
-                ) : (
-                    <></>
-                )}
-                <Title>{!loading ? stockData.name : ""} - {router.query.stock}</Title>
-            </Group>
-
-            <Paper shadow="md" radius="md" withBorder p="xl">
-                {stockData ? (
-                    <div>
-                        <p>Prix actuel : {stockData.c} USD</p>
-                        <p>Ouverture : {stockData.o} USD</p>
-                        <p>Plus haut : {stockData.h} USD</p>
-                        <p>Plus bas : {stockData.l} USD</p>
-                    </div>
-                ) : (
-                    <p>Chargement des données...</p>
-                )}
-            </Paper>
+            {loading ? (
+                <Text>Loading stock data...</Text>
+            ) : (
+                <>
+                    <Stack pb={15}>
+                        <Group>
+                            <AvatarIcon
+                                src={
+                                    "/api/stock-logo?symbol=" +
+                                    router.query.stock
+                                }
+                                id="logo"
+                                name={router.query.stock}
+                            />
+                            <Title>
+                                {stockData.name} - {router.query.stock}
+                            </Title>
+                        </Group>
+                        <Text>
+                            {stockData.country} &gt; {stockData.exchange}
+                        </Text>
+                    </Stack>
+                    <Paper shadow="md" radius="md" withBorder p="xl">
+                        {stockData ? (
+                            <div>
+                                <p>Prix actuel : {stockData.c} USD</p>
+                                <p>Ouverture : {stockData.o} USD</p>
+                                <p>Plus haut : {stockData.h} USD</p>
+                                <p>Plus bas : {stockData.l} USD</p>
+                            </div>
+                        ) : (
+                            <p>Chargement des données...</p>
+                        )}
+                    </Paper>
+                </>
+            )}
         </>
     );
 }
