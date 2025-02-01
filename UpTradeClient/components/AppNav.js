@@ -32,6 +32,7 @@ import Image from "next/image";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { useState } from "react";
+import AvatarIcon from "./AvatarIcon";
 
 export default function AppNav(props) {
     const [opened, { toggle }] = useDisclosure();
@@ -115,8 +116,7 @@ export default function AppNav(props) {
                     <Menu trigger="hover" ml={"auto"} mr={"1.5em"}>
                         <Menu.Target>
                           <Group>
-                          <Avatar color="green" radius="xl"></Avatar>
-                          <Avatar color="green" radius="xl">MK</Avatar>
+                          <AvatarIcon></AvatarIcon>
                           </Group>
                         </Menu.Target>
                         {props.loggedIn ? loggedInMenu : loggedOutMenu}

@@ -1,5 +1,5 @@
 import { Container, Grid, SimpleGrid, Skeleton } from "@mantine/core";
-import StartCard from "../components/StatCard";
+import StartCard from "./StatCard";
 
 export default function Dashboard() {
   const PRIMARY_COL_HEIGHT = "300px";

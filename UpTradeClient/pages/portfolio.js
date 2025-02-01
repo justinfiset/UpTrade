@@ -1,52 +1,71 @@
-import { Title, Table } from "@mantine/core";
+import { Title, Table, Group, Avatar, Anchor, Paper } from "@mantine/core";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import AvatarIcon from "../components/AvatarIcon";
 
 const data = [
-  {
-    symbol: "AAPL",
-    name: "Apple Inc.",
-    price: 145.86,
-    quantity: 10,
-  },
-  {
-    symbol: "GOOGL",
-    name: "Alphabet Inc.",
-    price: 2767.39,
-    quantity: 5,
-  },
-  {
-    symbol: "MSFT",
-    name: "Microsoft Corporation",
-    price: 289.67,
-    quantity: 8,
-  }
+    {
+        symbol: "AAPL",
+        name: "Apple Inc.",
+        price: 145.86,
+        quantity: 10,
+    },
+    {
+        symbol: "GOOGL",
+        name: "Alphabet Inc.",
+        price: 2767.39,
+        quantity: 5,
+    },
+    {
+        symbol: "MSFT",
+        name: "Microsoft Corporation",
+        price: 289.67,
+        quantity: 8,
+    },
 ];
 
 export default function Portfolio() {
-  const rows = data.map((stock) => (
-    <Table.Tr>
-      <Table.Td>{stock.name}</Table.Td>
-      <Table.Td>{stock.symbol}</Table.Td>
-      <Table.Td>{stock.price}</Table.Td>
-      <Table.Td>{stock.quantity}</Table.Td>
-      <Table.Td>{(stock.price * stock.quantity).toFixed(2)}</Table.Td>
-    </Table.Tr>
-  ));
-  
-  return (
-    <>
-      <Title>Your stock portfolio</Title>
-      <Table>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Name</Table.Th>
-            <Table.Th>Symbol</Table.Th>
-            <Table.Th>Price</Table.Th>
-            <Table.Th>Quantity</Table.Th>
-            <Table.Th>Total market value</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
-      </Table>
-    </>
-  );
+    const rows = data.map((stock) => {
+        return (
+            <Table.Tr>
+                <Table.Td>
+                    <Group>
+                        <AvatarIcon
+                            src={"/api/stock-logo?symbol=" + stock.symbol}
+                            name={stock.name}
+                        />
+                        {stock.name}
+                    </Group>
+                </Table.Td>
+                <Table.Td>
+                    <Anchor component={Link} href={"/stock/" + stock.symbol}>
+                        {stock.symbol}
+                    </Anchor>
+                </Table.Td>
+                <Table.Td>{stock.price}</Table.Td>
+                <Table.Td>{stock.quantity}</Table.Td>
+                <Table.Td>{(stock.price * stock.quantity).toFixed(2)}</Table.Td>
+            </Table.Tr>
+        );
+    });
+
+    return (
+        <>
+            <Title>Your stock portfolio</Title>
+            <Paper shadow="md" radius="md" withBorder p="xl">
+                <Table>
+                    <Table.Thead>
+                        <Table.Tr>
+                            <Table.Th>Name</Table.Th>
+                            <Table.Th>Symbol</Table.Th>
+                            <Table.Th>Price</Table.Th>
+                            <Table.Th>Quantity</Table.Th>
+                            <Table.Th>Total market value</Table.Th>
+                        </Table.Tr>
+                    </Table.Thead>
+                    <Table.Tbody>{rows}</Table.Tbody>
+                </Table>
+            </Paper>
+        </>
+    );
 }
