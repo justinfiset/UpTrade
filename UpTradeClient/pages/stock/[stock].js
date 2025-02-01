@@ -1,4 +1,13 @@
-import { Avatar, Group, Paper, Space, Stack, Text, Title } from "@mantine/core";
+import {
+    Avatar,
+    Badge,
+    Group,
+    Paper,
+    Space,
+    Stack,
+    Text,
+    Title,
+} from "@mantine/core";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import AvatarIcon from "../../components/AvatarIcon";
@@ -49,9 +58,29 @@ export default function Stock() {
                                 {stockData.name} - {router.query.stock}
                             </Title>
                         </Group>
-                        <Text>
-                            {stockData.country} &gt; {stockData.exchange}
-                        </Text>
+                        <Group>
+                            <Badge
+                                size="xl"
+                                variant="gradient"
+                                gradient={{ from: "teal", to: "lime", deg: 90 }}
+                            >
+                                {stockData.country}
+                            </Badge>
+                            <Badge
+                                size="xl"
+                                variant="gradient"
+                                gradient={{ from: "lime", to: "teal", deg: 90 }}
+                            >
+                                {stockData.exchange}
+                            </Badge>
+                            <Badge
+                                size="xl"
+                                variant="gradient"
+                                gradient={{ from: "teal", to: "blue", deg: 90 }}
+                            >
+                                {stockData.finnhubIndustry}
+                            </Badge>
+                        </Group>
                     </Stack>
                     <Paper shadow="md" radius="md" withBorder p="xl">
                         {stockData ? (
