@@ -10,11 +10,11 @@ export default function Dashboard() {
 
   return (
     <div>
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md" mt="md">
         <Skeleton
           height={PRIMARY_COL_HEIGHT}
           radius="md"
-          animate={false}
+          animate={true}
           visible={loading}
         >
           <StartCard title="Total Sales" value="$1,200" diff={-5} />
@@ -25,7 +25,7 @@ export default function Dashboard() {
             <Skeleton
               height={SECONDARY_COL_HEIGHT}
               radius="md"
-              animate={false}
+              animate={true}
               visible={loading}
             >
               <StartCard title="Total Sales" value="$1,200" diff={-5} />
@@ -36,7 +36,7 @@ export default function Dashboard() {
             <Skeleton
               height={SECONDARY_COL_HEIGHT}
               radius="md"
-              animate={false}
+              animate={true}
               visible={loading}
             >
               <StartCard title="Total Sales" value="$1,200" diff={-5} />
@@ -47,7 +47,7 @@ export default function Dashboard() {
             <Skeleton
               height={SECONDARY_COL_HEIGHT}
               radius="md"
-              animate={false}
+              animate={true}
               visible={loading}
             >
               <StartCard title="Total Sales" value="$1,200" diff={-5} />

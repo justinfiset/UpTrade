@@ -13,7 +13,7 @@ export default function StartCard(props) {
   const DiffIcon = props.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
   return (
-    <Paper withBorder p="md" radius="md" key={props.title}>
+    <Paper shadow="md" radius="md" withBorder p="lg" key={props.title}>
       <Group justify="space-between">
         <Text size="xs" c="dimmed" className={classes.title}>
           {props.title}

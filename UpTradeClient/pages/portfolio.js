@@ -33,7 +33,10 @@ const data = [
 ];
 
 export default function Portfolio() {
+    let totalValue = 0;
     const rows = data.map((stock) => {
+        totalValue += stock.price * stock.quantity;
+
         return (
             <Table.Tr>
                 <Table.Td>
@@ -75,7 +78,7 @@ export default function Portfolio() {
     return (
         <>
             <Title>Your stock portfolio</Title>
-            <Paper shadow="md" radius="md" withBorder p="xl" w={800}>
+            <Paper shadow="md" radius="md" withBorder p="lg" mt="md" w={800}>
                 <Table>
                     <Table.Thead>
                         <Table.Tr>
@@ -86,7 +89,25 @@ export default function Portfolio() {
                             <Table.Th>Total market value</Table.Th>
                         </Table.Tr>
                     </Table.Thead>
-                    <Table.Tbody>{rows}</Table.Tbody>
+                    <Table.Tbody>
+                        {rows}
+                        <Table.Tr>
+                            <Table.Th
+                                colSpan={4}
+                                style={{ textAlign: "right" }}
+                            >
+                                (Total)
+                            </Table.Th>
+                            <Table.Th>
+                                <NumberFormatter
+                                    prefix="$ "
+                                    value={totalValue}
+                                    thousandSeparator
+                                    decimalScale={2}
+                                />
+                            </Table.Th>
+                        </Table.Tr>
+                    </Table.Tbody>
                 </Table>
             </Paper>
         </>
