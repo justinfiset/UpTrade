@@ -26,7 +26,11 @@ export default function AvatarIcon(props) {
                 setLoading(false);
             }
         }
-        fetchStockLogo();
+        if(!props.imgSrc) fetchStockLogo();
+        else {
+            setLoading(false);
+            setLogo(props.imgSrc);
+        }
     }, [props.src]);
 
     return (
