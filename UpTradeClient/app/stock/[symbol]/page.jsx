@@ -42,8 +42,8 @@ export default function Stock() {
             setLoading(true);
             try {
                 const url = `/api/stock?symbol=${stockSymbol}`;
-                const response = await fetch(url);
-                const data = await response.json();
+                const res = await fetch(url);
+                const data = await res.json();
                 setStockData(data);
                 setLoading(false);
             } catch (error) {
@@ -71,10 +71,10 @@ export default function Stock() {
 
         async function fetchEarningsCalendar() {
             try {
-                const response = await fetch(
+                const res = await fetch(
                     `/api/earningsCalendar?from=2025-01-01&to=2026-01-01&symbol=${stockSymbol}`
                 );
-                const data = await response.json();
+                const data = await res.json();
                 setEarningsCalendar(data.earningsCalendar);
             } catch (error) {
                 console.error("Error fetching earnings calendar data", error);
@@ -111,11 +111,11 @@ export default function Stock() {
             }
 
             return (
-                <Group mt="md">
-                    <Badge size="lg" color={color}>
+                <Group mt="md" key={"group-" + earnings.quarter}>
+                    <Badge size="lg" color={color} key={"badge-" + earnings.quarter}>
                         Q{earnings.quarter} - {earnings.year}
                     </Badge>
-                    <Text td={finished ? "line-through" : ""}>
+                    <Text td={finished ? "line-through" : ""} key={"date-" + earnings.quarter}>
                         {eventDate.toLocaleDateString("en-US", {
                             month: "short",
                             day: "2-digit",
@@ -141,10 +141,10 @@ export default function Stock() {
                                 <AvatarIcon
                                     imgSrc={stockData.logo}
                                     id="logo"
-                                    name={router.query.stock}
+                                    name={stockSymbol}
                                 />
                                 <Title>
-                                    {stockData.name} - {router.query.stock}
+                                    {stockData.name} - {stockSymbol}
                                 </Title>
                             </Group>
                             <Group>
@@ -185,8 +185,10 @@ export default function Stock() {
                         </Stack>
                         <Title ml="auto" mr="md">
                             <NumberFormatter
-                                prefix="$ " 
-                                value={stockData.price ? stockData.price : 0.001} // TODO CHANGE FROM WIGHT API CALL DATA
+                                prefix="$ "
+                                value={
+                                    stockData.price ? stockData.price : 0.001
+                                } // TODO CHANGE FROM WIGHT API CALL DATA
                                 thousandSeparator
                                 decimalScale={2}
                             />
@@ -203,7 +205,7 @@ export default function Stock() {
                                 mt="md"
                             >
                                 <Text c="dimmed">Price history</Text>
-                                <ResponsiveContainer width="100%" height={400}>
+                                <ResponsiveContainer height={400}>
                                     {chartData ? (
                                         <AreaChart data={chartData}>
                                             <defs>
@@ -265,6 +267,7 @@ export default function Stock() {
                                         withBorder
                                         p="lg"
                                         mt="md"
+                                        key={"earnings-" + stockSymbol}
                                     >
                                         <Text c="dimmed">
                                             Earnings Calendar
@@ -287,22 +290,32 @@ export default function Stock() {
                             >
                                 <Text c="dimmed">Market informations</Text>
                                 <Table>
-                                    <Table.Tr>
-                                        <Table.Th>Current Price</Table.Th>
-                                        <Table.Td>{stockData.c} USD</Table.Td>
-                                    </Table.Tr>
-                                    <Table.Tr>
-                                        <Table.Th>Highest</Table.Th>
-                                        <Table.Td>{stockData.h} USD</Table.Td>
-                                    </Table.Tr>
-                                    <Table.Tr>
-                                        <Table.Th>Lowest</Table.Th>
-                                        <Table.Td>{stockData.l} USD</Table.Td>
-                                    </Table.Tr>
-                                    <Table.Tr>
-                                        <Table.Th>Open price</Table.Th>
-                                        <Table.Td>{stockData.o} USD</Table.Td>
-                                    </Table.Tr>
+                                    <Table.Tbody>
+                                        <Table.Tr>
+                                            <Table.Th>Current Price</Table.Th>
+                                            <Table.Td>
+                                                {stockData.c} USD
+                                            </Table.Td>
+                                        </Table.Tr>
+                                        <Table.Tr>
+                                            <Table.Th>Highest</Table.Th>
+                                            <Table.Td>
+                                                {stockData.h} USD
+                                            </Table.Td>
+                                        </Table.Tr>
+                                        <Table.Tr>
+                                            <Table.Th>Lowest</Table.Th>
+                                            <Table.Td>
+                                                {stockData.l} USD
+                                            </Table.Td>
+                                        </Table.Tr>
+                                        <Table.Tr>
+                                            <Table.Th>Open price</Table.Th>
+                                            <Table.Td>
+                                                {stockData.o} USD
+                                            </Table.Td>
+                                        </Table.Tr>
+                                    </Table.Tbody>
                                 </Table>
                             </Paper>
                             <Paper
@@ -314,20 +327,24 @@ export default function Stock() {
                             >
                                 <Text c="dimmed">General Informations</Text>
                                 <Table>
-                                    <Table.Tr>
-                                        <Table.Th>
-                                            Market Capitalization
-                                        </Table.Th>
-                                        <Table.Td>
-                                            {stockData.marketCapitalization}
-                                        </Table.Td>
-                                    </Table.Tr>
-                                    <Table.Tr>
-                                        <Table.Th>Oustanding Shares</Table.Th>
-                                        <Table.Td>
-                                            {stockData.shareOutstanding}
-                                        </Table.Td>
-                                    </Table.Tr>
+                                    <Table.Tbody>
+                                        <Table.Tr>
+                                            <Table.Th>
+                                                Market Capitalization
+                                            </Table.Th>
+                                            <Table.Td>
+                                                {stockData.marketCapitalization}
+                                            </Table.Td>
+                                        </Table.Tr>
+                                        <Table.Tr>
+                                            <Table.Th>
+                                                Oustanding Shares
+                                            </Table.Th>
+                                            <Table.Td>
+                                                {stockData.shareOutstanding}
+                                            </Table.Td>
+                                        </Table.Tr>
+                                    </Table.Tbody>
                                 </Table>
                             </Paper>
                         </Stack>
