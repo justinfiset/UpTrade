@@ -11,7 +11,7 @@ function DynamicBreadcrumbs() {
 
         const Component = index == pathSegments.length - 1 ? Text : Anchor
         return (
-            <Component component={Link} href={ref} key={title}>
+            <Component component={Link} href={ref} key={title+ref+index}>
                 {title.charAt(0).toUpperCase() + title.slice(1)}
             </Component>
         );
@@ -19,7 +19,7 @@ function DynamicBreadcrumbs() {
 
     const Component = (pathSegments.length == 0) ? Text : Anchor;
     items.unshift(
-        <Component component={Link} href="/">
+        <Component component={Link} href="/" key="home">
             Home
         </Component>
     );
