@@ -16,7 +16,7 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
-import AvatarIcon from "../../comopnents/AvatarIcon";
+import AvatarIcon from "@/comopnents/AvatarIcon";
 import {
     AreaChart,
     Area,
