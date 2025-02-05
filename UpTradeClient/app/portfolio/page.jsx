@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Title,
     Table,
@@ -9,7 +11,7 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import AvatarIcon from "../components/AvatarIcon";
+import AvatarIcon from "../comopnents/AvatarIcon";
 
 const data = [
     {
@@ -38,8 +40,8 @@ export default function Portfolio() {
         totalValue += stock.price * stock.quantity;
 
         return (
-            <Table.Tr>
-                <Table.Td>
+            <Table.Tr key={stock.symbol}>
+                <Table.Td key={"img-" + stock.symbol}>
                     <Group>
                         <AvatarIcon
                             src={"/api/stock?symbol=" + stock.symbol}
@@ -49,12 +51,12 @@ export default function Portfolio() {
                         {stock.name}
                     </Group>
                 </Table.Td>
-                <Table.Td>
+                <Table.Td key={"symbol-" + stock.symbol}>
                     <Anchor component={Link} href={"/stock/" + stock.symbol}>
                         {stock.symbol}
                     </Anchor>
                 </Table.Td>
-                <Table.Td>
+                <Table.Td key={"price-" + stock.symbol}>
                     <NumberFormatter
                         prefix="$ "
                         value={stock.price}
@@ -62,8 +64,8 @@ export default function Portfolio() {
                         decimalScale={2}
                     />
                 </Table.Td>
-                <Table.Td>{stock.quantity}</Table.Td>
-                <Table.Td>
+                <Table.Td key={"qt-" + stock.symbol}>{stock.quantity}</Table.Td>
+                <Table.Td key={"total-" + stock.symbol}>
                     <NumberFormatter
                         prefix="$ "
                         value={stock.price * stock.quantity}

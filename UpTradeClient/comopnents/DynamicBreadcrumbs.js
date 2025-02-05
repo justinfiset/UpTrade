@@ -1,10 +1,9 @@
 import { Breadcrumbs, Anchor, Text } from "@mantine/core";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function DynamicBreadcrumbs() {
-    const router = useRouter();
-    const pathSegments = router.asPath.split("?")[0].split("/").filter(Boolean);
+    const pathSegments = usePathname().split("?")[0].split("/").filter(Boolean);
 
     const items = pathSegments.map((segment, index) => {
         const ref = "/" + pathSegments.slice(0, index + 1).join("/");
@@ -12,7 +11,7 @@ function DynamicBreadcrumbs() {
 
         const Component = index == pathSegments.length - 1 ? Text : Anchor
         return (
-            <Component component={Link} href={ref} key={index}>
+            <Component component={Link} href={ref} key={ref}>
                 {title.charAt(0).toUpperCase() + title.slice(1)}
             </Component>
         );

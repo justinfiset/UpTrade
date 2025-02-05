@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge, Group, Paper, Skeleton, Title, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 

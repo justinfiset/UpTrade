@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Badge,
     Grid,
@@ -13,9 +15,8 @@ import {
     useMantineColorScheme,
     useMantineTheme,
 } from "@mantine/core";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import AvatarIcon from "../../components/AvatarIcon";
+import AvatarIcon from "../../comopnents/AvatarIcon";
 import {
     AreaChart,
     Area,
@@ -25,15 +26,15 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
+import { useParams } from "next/navigation";
 
 export default function Stock() {
     const [stockData, setStockData] = useState(null);
-    const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [earningsCalendar, setEarningsCalendar] = useState(null);
 
-    // Vérifie que `router` est prêt avant de récupérer la donnée
-    const stockSymbol = router.isReady ? router.query.stock : null;
+    const params = useParams();
+    const stockSymbol = params.symbol;
     useEffect(() => {
         if (!stockSymbol) return; // Ne fait rien tant que `stockSymbol` est null
 
