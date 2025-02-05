@@ -11,7 +11,7 @@ function DynamicBreadcrumbs() {
 
         const Component = index == pathSegments.length - 1 ? Text : Anchor
         return (
-            <Component component={Link} href={ref} key={ref}>
+            <Component component={Link} href={ref} key={title}>
                 {title.charAt(0).toUpperCase() + title.slice(1)}
             </Component>
         );

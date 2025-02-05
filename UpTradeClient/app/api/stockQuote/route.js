@@ -1,4 +1,4 @@
-import { getFinnhubClient } from "../../lib/finnhubClient";
+import { getFinnhubClient } from "@/lib/finnhubClient";
 
 export default async function handler(req, res) {
     const finnhubClient = getFinnhubClient();
