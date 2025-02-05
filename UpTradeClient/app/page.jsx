@@ -1,7 +1,7 @@
 "use client";
 
 import { Title } from "@mantine/core";
-import Dashboard from "./comopnents/Dashboard";
+import Dashboard from "@/comopnents/Dashboard";
 
 export default function Index() {
     return (

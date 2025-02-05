@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import AvatarIcon from "../comopnents/AvatarIcon";
+import AvatarIcon from "@/comopnents/AvatarIcon";
 
 const data = [
     {

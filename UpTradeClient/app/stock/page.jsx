@@ -74,10 +74,9 @@ export default function BrowseStock() {
     return (
         <Paper>
             <Title>Browse Stocks</Title>
-            <Skeleton>
-                Loading earnings calendar...
+            <Skeleton h={500} w={300} visible={!earningsCalendar}>
+                {earningsSchedule}
             </Skeleton>
-            {earningsSchedule}
         </Paper>
     );
 }
